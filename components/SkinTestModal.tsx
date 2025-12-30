@@ -95,24 +95,35 @@ const SkinTestModal: React.FC<SkinTestModalProps> = ({ isOpen, onClose }) => {
     setIsSubmitting(true);
     setError(null);
 
-    const FORMSPREE_ID = "mqakpnvb"; 
+    const FORMSPREE_ID = "mpqzgjle"; 
+
+    // Formateamos las respuestas para que el correo sea legible
+    const readableAnswers = Object.entries(answers).map(([category, value]) => {
+      return `${category}: ${value}`;
+    }).join('\n');
 
     try {
       const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json' 
+        },
         body: JSON.stringify({
-          _subject: `TEST PIEL COMPLETADO: ${formData.name}`,
-          to: "juanmtena1985@gmail.com",
-          ...formData,
-          ...answers
+          _subject: `💎 TEST DE PIEL COMPLETADO: ${formData.name}`,
+          nombre: formData.name,
+          email: formData.email,
+          telefono: formData.phone,
+          diagnostico: readableAnswers, // Esto enviará todas las preguntas/respuestas juntas
+          ...answers // También enviamos los campos sueltos por si quieres filtrar datos en Formspree
         })
       });
 
       if (response.ok) {
         setIsSent(true);
       } else {
-        throw new Error("Envío fallido");
+        const data = await response.json();
+        throw new Error(data.error || "Error en el envío");
       }
     } catch (err) {
       setError("Error al conectar con el servidor. Por favor, contacte vía WhatsApp.");

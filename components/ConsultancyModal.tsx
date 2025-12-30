@@ -26,24 +26,37 @@ const ConsultancyModal: React.FC<ConsultancyModalProps> = ({ isOpen, onClose }) 
     setIsSubmitting(true);
     setError(null);
 
-    const FORMSPREE_ID = "mqakpnvb"; 
+    // Usa el ID que aparece en tu endpoint de Formspree: mpqzgjle
+    const FORM_ID = "mpqzgjle"; 
 
     try {
-      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const response = await fetch(`https://formspree.io/f/${FORM_ID}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json' // Es importante añadir esto para Formspree
+        },
         body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          interest: formData.interest,
+          message: formData.comments, // Formspree suele esperar "message" por defecto
           _subject: `NUEVA CONSULTORÍA VIP: ${formData.name}`,
-          to: "juanmtena1985@gmail.com",
-          ...formData,
-          _message: `Interés: ${formData.interest}\nComentarios: ${formData.comments}`
         })
       });
 
       if (response.ok) {
         setIsSent(true);
+        // Opcional: Limpiar el formulario tras el éxito
+        setFormData({ name: '', email: '', phone: '', interest: 'facial', comments: '' });
       } else {
-        throw new Error("Error en el envío");
+        const data = await response.json();
+        if (data.errors) {
+          setError(data.errors.map((error: any) => error.message).join(", "));
+        } else {
+          throw new Error("Error en el envío");
+        }
       }
     } catch (err) {
       setError("Lo sentimos, hubo un problema al procesar su solicitud. Inténtelo de nuevo o contacte vía WhatsApp.");
