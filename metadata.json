@@ -1,0 +1,7 @@
+{
+  "name": "Centro Estetica - La Excelencia de tu Piel",
+  "description": "Una landing page de ultra-lujo para el centro de estética PRUEBA, diseñada con estética de revista de moda premium y componentes interactivos avanzados.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
