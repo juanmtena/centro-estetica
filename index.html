@@ -1,9 +1,9 @@
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="h-full">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
     <title>PRUEBA | La Excelencia de tu Piel</title>
     <!-- Google Fonts: Playfair Display & Montserrat -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,35 +34,72 @@
       }
     </script>
     <style>
-      body {
+      :root {
+        --sat: env(safe-area-inset-top);
+        --sar: env(safe-area-inset-right);
+        --sab: env(safe-area-inset-bottom);
+        --sal: env(safe-area-inset-left);
+      }
+      
+      html, body {
         background-color: #000000;
         color: #FDFCF8;
-        cursor: default;
+        overflow-x: hidden;
+        width: 100%;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
       }
+
+      body {
+        /* Soporte integral para Safe Areas */
+        padding: var(--sat) var(--sar) var(--sab) var(--sal);
+      }
+
       .gold-text-gradient {
         background: linear-gradient(to right, #D4AF37, #F4DF4E, #D4AF37);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+
       .luxury-border {
         border-image: linear-gradient(to bottom right, #D4AF37, #A67C00) 1;
       }
+
       ::-webkit-scrollbar {
-        width: 8px;
+        width: 6px;
       }
       ::-webkit-scrollbar-track {
         background: #000;
       }
       ::-webkit-scrollbar-thumb {
         background: #D4AF37;
+        border-radius: 10px;
       }
-      .story-border {
-        background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+
+      /* Fix para altura dinámica perfecta en iOS Safari */
+      .h-screen-ios {
+        height: 100vh;
+        height: 100svh;
       }
-      /* Custom gold story border */
-      .gold-story-border {
-        background: linear-gradient(45deg, #D4AF37 0%, #F4DF4E 50%, #A67C00 100%);
+      
+      .min-h-screen-ios {
+        min-height: 100vh;
+        min-height: 100svh;
       }
+
+      /* Prevención de saltos en animaciones AOS en móvil */
+      [data-aos] {
+        pointer-events: none;
+      }
+      .aos-animate {
+        pointer-events: auto;
+      }
+
+      /* Utility para márgenes de seguridad manuales */
+      .pt-safe { padding-top: var(--sat); }
+      .pb-safe { padding-bottom: var(--sab); }
+      .mt-safe { margin-top: var(--sat); }
+      .mb-safe { margin-bottom: var(--sab); }
     </style>
 <script type="importmap">
 {
@@ -76,8 +113,8 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-<body>
-    <div id="root"></div>
+<body class="selection:bg-gold selection:text-black">
+    <div id="root" class="w-full overflow-x-hidden"></div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script type="module" src="/index.tsx"></script>
 </body>
