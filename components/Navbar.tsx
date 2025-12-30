@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { treatmentsData } from '../data/treatments';
 
@@ -98,7 +97,10 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTreatments, onSelectTreatment, on
           <div className="flex justify-between items-center mb-16">
             <span className="font-serif text-3xl text-white tracking-[0.2em]">PRUEBA</span>
             <button className="text-gold" onClick={() => setIsMobileOpen(false)}>
-              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M6 18L18 6M6 6l12 12" /></button>
+              <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M6 18L18 6M6 6l12 12" />
+              </svg> 
+            </button>
           </div>
           
           <div className="flex flex-col gap-8 text-center md:text-left">
