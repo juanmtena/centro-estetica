@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
   const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address)}`;
 
   return (
-    <footer id="contacto" className="bg-luxuryBlack border-t border-gold/20 pt-24 pb-12 overflow-hidden">
+    <footer id="contacto" className="bg-luxuryBlack border-t border-gold/20 pt-24 pb-[calc(3rem+env(safe-area-inset-bottom))] overflow-hidden">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
           
@@ -58,7 +58,6 @@ const Footer: React.FC = () => {
                 {address.split(',').slice(2).join(',')}
               </p>
               
-              {/* Mapa embebido con filtro oscuro personalizado */}
               <div className="w-full h-48 border border-gold/20 overflow-hidden relative group rounded-sm shadow-2xl shadow-gold/5">
                 <iframe 
                   title="Ubicación PRUEBA"
@@ -71,7 +70,6 @@ const Footer: React.FC = () => {
                 ></iframe>
                 <div className="absolute inset-0 bg-luxuryBlack/20 group-hover:bg-transparent transition-all pointer-events-none"></div>
                 
-                {/* Botón flotante GPS sobre el mapa para mayor impacto visual */}
                 <a 
                   href={googleMapsUrl} 
                   target="_blank" 

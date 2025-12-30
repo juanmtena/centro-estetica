@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { treatmentsData } from '../data/treatments';
 
@@ -27,9 +28,9 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTreatments, onSelectTreatment, on
   const whatsappUrl = "https://wa.me/34000000000?text=Hola,%20deseo%20agendar%20una%20cita%20VIP%20en%20PRUEBA.";
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-700 ${isScrolled ? 'bg-luxuryBlack/95 backdrop-blur-md py-4 shadow-2xl shadow-gold/5' : 'bg-transparent py-8'}`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-700 ${isScrolled ? 'bg-luxuryBlack/95 backdrop-blur-md py-4 shadow-2xl shadow-gold/5' : 'bg-transparent py-8'} pt-[max(1rem,env(safe-area-inset-top))]`}>
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
-        <a href="/" className="font-serif text-3xl tracking-[0.2em] text-white hover:text-gold transition-colors">
+        <a href="/" className="font-serif text-2xl md:text-3xl tracking-[0.2em] text-white hover:text-gold transition-colors">
           PRUEBA
         </a>
 
@@ -84,7 +85,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTreatments, onSelectTreatment, on
         </div>
 
         {/* Mobile/Tablet Toggle */}
-        <button className="lg:hidden text-white" onClick={() => setIsMobileOpen(!isMobileOpen)}>
+        <button className="lg:hidden text-white p-2" onClick={() => setIsMobileOpen(!isMobileOpen)}>
           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d={isMobileOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
           </svg>
@@ -93,10 +94,10 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTreatments, onSelectTreatment, on
 
       {/* Mobile Menu Overlay */}
       <div className={`fixed inset-0 bg-luxuryBlack z-[60] transition-transform duration-700 ease-in-out ${isMobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex flex-col h-full p-8 md:p-16 overflow-y-auto">
+        <div className="flex flex-col h-full p-8 md:p-16 overflow-y-auto pt-[max(4rem,calc(2rem+env(safe-area-inset-top)))] pb-[env(safe-area-inset-bottom)]">
           <div className="flex justify-between items-center mb-16">
             <span className="font-serif text-3xl text-white tracking-[0.2em]">PRUEBA</span>
-            <button className="text-gold" onClick={() => setIsMobileOpen(false)}>
+            <button className="text-gold p-2" onClick={() => setIsMobileOpen(false)}>
               <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M6 18L18 6M6 6l12 12" />
               </svg> 
@@ -104,7 +105,6 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenTreatments, onSelectTreatment, on
           </div>
           
           <div className="flex flex-col gap-8 text-center md:text-left">
-            {/* Mobile Dropdown for Treatments */}
             <div>
               <button 
                 onClick={() => toggleMobileCategory(-1)}

@@ -95,7 +95,7 @@ const SkinTestModal: React.FC<SkinTestModalProps> = ({ isOpen, onClose }) => {
     setIsSubmitting(true);
     setError(null);
 
-    const FORMSPREE_ID = "mqakpnvb"; // Usa tu propio ID gratuito de Formspree
+    const FORMSPREE_ID = "mqakpnvb"; 
 
     try {
       const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
@@ -122,76 +122,87 @@ const SkinTestModal: React.FC<SkinTestModalProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[600] flex items-center justify-center p-0 md:p-10 animate-[fadeIn_0.4s_ease-out]">
-      <div className="absolute inset-0 bg-black/95 backdrop-blur-2xl" onClick={onClose}></div>
+    <div className="fixed inset-0 z-[600] flex items-center justify-center animate-[fadeIn_0.4s_ease-out]">
+      <div className="absolute inset-0 bg-black/98 backdrop-blur-2xl" onClick={onClose}></div>
       
-      <div className="relative w-full max-w-5xl h-full md:h-auto max-h-[90vh] bg-luxuryBlack border-y md:border border-gold/30 shadow-2xl overflow-y-auto no-scrollbar flex flex-col">
-        <div className="p-8 border-b border-gold/10 flex justify-between items-center sticky top-0 bg-luxuryBlack z-20">
+      <div className="relative w-full h-full md:h-[auto] md:max-w-4xl md:max-h-[85vh] bg-luxuryBlack md:border border-gold/20 shadow-2xl overflow-y-auto custom-scrollbar flex flex-col pt-safe pb-safe">
+        
+        {/* Header Header */}
+        <div className="p-6 md:p-8 border-b border-gold/10 flex justify-between items-center sticky top-0 bg-luxuryBlack/90 backdrop-blur-lg z-20">
           <div>
-            <span className="text-gold uppercase tracking-[0.5em] text-[10px] font-bold block mb-1">Diagnostic Suite</span>
-            <h2 className="text-2xl font-serif text-white italic">Analizador de Dermis</h2>
+            <span className="text-gold uppercase tracking-[0.4em] text-[9px] font-bold block mb-1">Skin Diagnostic Suite</span>
+            <h2 className="text-xl md:text-2xl font-serif text-white italic">Protocolo de Análisis</h2>
           </div>
-          <button onClick={onClose} className="text-white/40 hover:text-gold transition-colors">
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M6 18L18 6M6 6l12 12" /></svg>
+          <button onClick={onClose} className="text-white/40 hover:text-gold transition-colors p-2">
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </button>
         </div>
 
-        <div className="p-8 md:p-16 flex-grow">
+        <div className="p-6 md:p-16 flex-grow">
           {!isFinished ? (
             <div className="animate-[slideIn_0.5s_ease-out]">
-              <div className="flex items-center gap-6 mb-12">
-                <span className="text-gold font-serif text-5xl italic opacity-50">0{step + 1}</span>
-                <span className="h-[1px] w-20 bg-gold/20"></span>
-                <span className="text-xs uppercase tracking-[0.4em] text-gold font-bold">{questions[step].category}</span>
+              <div className="flex items-center gap-6 mb-8 md:mb-12">
+                <span className="text-gold font-serif text-4xl md:text-5xl italic opacity-40">0{step + 1}</span>
+                <span className="h-[1px] w-12 md:w-20 bg-gold/20"></span>
+                <span className="text-[10px] uppercase tracking-[0.4em] text-gold font-bold">{questions[step].category}</span>
               </div>
-              <h3 className="text-3xl md:text-5xl font-serif text-white mb-16 leading-tight">{questions[step].question}</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <h3 className="text-2xl md:text-4xl font-serif text-white mb-10 md:mb-16 leading-tight">{questions[step].question}</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                 {questions[step].options.map((opt, i) => (
-                  <button key={i} onClick={() => handleOption(questions[step].category, opt.value)} className="group relative p-8 border border-gold/10 hover:border-gold/60 bg-white/[0.02] transition-all text-left">
-                    <span className="text-white/60 group-hover:text-white text-sm uppercase tracking-widest font-medium">{opt.label}</span>
+                  <button 
+                    key={i} 
+                    onClick={() => handleOption(questions[step].category, opt.value)} 
+                    className="group relative p-6 md:p-8 border border-white/10 hover:border-gold/40 bg-white/[0.02] transition-all text-left active:bg-gold/5"
+                  >
+                    <span className="text-white/70 group-hover:text-gold text-xs md:text-sm uppercase tracking-[0.2em] font-medium transition-colors">{opt.label}</span>
                   </button>
                 ))}
               </div>
             </div>
           ) : !isSent ? (
             <div className="max-w-2xl mx-auto text-center animate-[fadeIn_0.8s]">
-              <span className="text-gold uppercase tracking-[0.6em] text-xs font-bold mb-6 block">Análisis Completado</span>
-              <h3 className="text-4xl md:text-6xl font-serif text-white mb-8 italic">Protocolo Listo.</h3>
-              <p className="text-gray-400 text-lg mb-12 italic">Introduzca sus datos para recibir el diagnóstico técnico y coordinar su cita VIP.</p>
+              <span className="text-gold uppercase tracking-[0.6em] text-[10px] font-bold mb-6 block">Análisis Finalizado</span>
+              <h3 className="text-3xl md:text-5xl font-serif text-white mb-6 italic">Prepare su Visita.</h3>
+              <p className="text-gray-400 text-base md:text-lg mb-10 italic leading-relaxed">Sus respuestas serán evaluadas por un especialista. Indique sus datos para el informe técnico.</p>
               
-              {error && <p className="mb-6 text-red-400 text-xs tracking-widest">{error}</p>}
+              {error && <p className="mb-6 text-red-400 text-xs uppercase tracking-widest bg-red-400/10 py-3">{error}</p>}
 
               <form onSubmit={handleSubmit} className="text-left space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] text-gold uppercase tracking-widest font-bold">Nombre</label>
-                    <input required className="w-full bg-white/[0.03] border border-gold/20 p-4 text-white focus:border-gold outline-none" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
+                    <label className="text-[10px] text-gold uppercase tracking-widest font-bold ml-1">Nombre Completo</label>
+                    <input required className="w-full bg-white/[0.04] border border-gold/10 p-4 text-white focus:border-gold outline-none transition-all" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] text-gold uppercase tracking-widest font-bold">Teléfono</label>
-                    <input required className="w-full bg-white/[0.03] border border-gold/20 p-4 text-white focus:border-gold outline-none" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
+                    <label className="text-[10px] text-gold uppercase tracking-widest font-bold ml-1">Teléfono VIP</label>
+                    <input required type="tel" className="w-full bg-white/[0.04] border border-gold/10 p-4 text-white focus:border-gold outline-none transition-all" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] text-gold uppercase tracking-widest font-bold">Email</label>
-                  <input required type="email" className="w-full bg-white/[0.03] border border-gold/20 p-4 text-white focus:border-gold outline-none" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
+                  <label className="text-[10px] text-gold uppercase tracking-widest font-bold ml-1">Email Privado</label>
+                  <input required type="email" className="w-full bg-white/[0.04] border border-gold/10 p-4 text-white focus:border-gold outline-none transition-all" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
                 </div>
-                <button disabled={isSubmitting} className="w-full py-6 bg-gold text-luxuryBlack uppercase text-xs font-bold tracking-[0.4em] hover:bg-white transition-all shadow-xl shadow-gold/20">
-                  {isSubmitting ? 'Enviando Análisis...' : 'Enviar a PRUEBA Concierge'}
+                <button disabled={isSubmitting} className="w-full py-5 md:py-6 bg-gold text-luxuryBlack uppercase text-[10px] font-bold tracking-[0.4em] hover:bg-white hover:scale-[1.02] transition-all shadow-xl shadow-gold/10 active:scale-95">
+                  {isSubmitting ? 'Generando Protocolo...' : 'Enviar Informe a Concierge'}
                 </button>
               </form>
             </div>
           ) : (
-            <div className="text-center py-20 animate-[zoomIn_0.6s_ease-out]">
-              <div className="w-20 h-20 border border-gold rounded-full flex items-center justify-center mx-auto mb-10">
-                <svg className="w-10 h-10 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M5 13l4 4L19 7" /></svg>
+            <div className="text-center py-12 md:py-20 animate-[zoomIn_0.6s_ease-out]">
+              <div className="w-16 h-16 md:w-20 md:h-20 border border-gold rounded-full flex items-center justify-center mx-auto mb-8 shadow-[0_0_30px_rgba(212,175,55,0.2)]">
+                <svg className="w-8 h-8 md:w-10 md:h-10 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 13l4 4L19 7" />
+                </svg>
               </div>
-              <h4 className="text-4xl md:text-6xl font-serif text-white mb-10 italic">Gracias, {formData.name.split(' ')[0]}.</h4>
-              <div className="bg-white/[0.03] p-8 border-l-2 border-gold max-w-xl mx-auto text-left italic">
-                <p className="text-gold text-[10px] uppercase tracking-widest mb-2 font-bold">Auto-confirmación enviada:</p>
-                <p className="text-gray-400 text-sm">"Hemos recibido su test de piel. Un especialista de PRUEBA analizará sus respuestas para proponerle el tratamiento óptimo. Le contactaremos en menos de 24h para agendar su cita. Bienvenido a la excelencia."</p>
+              <h4 className="text-3xl md:text-5xl font-serif text-white mb-8 italic">Excelencia Recibida.</h4>
+              <div className="bg-white/[0.02] p-6 md:p-8 border-l border-gold max-w-xl mx-auto text-left italic backdrop-blur-sm">
+                <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+                  "Hemos recibido sus respuestas, <strong>{formData.name.split(' ')[0]}</strong>. Un especialista de PRUEBA revisará su fototipo y necesidades. Recibirá una propuesta personalizada en menos de 24 horas."
+                </p>
               </div>
-              <button onClick={onClose} className="mt-16 px-16 py-5 border border-gold/30 text-gold uppercase text-[10px] font-bold tracking-[0.4em] hover:bg-gold hover:text-luxuryBlack transition-all">Cerrar</button>
+              <button onClick={onClose} className="mt-12 px-12 md:px-16 py-4 md:py-5 border border-gold/20 text-gold uppercase text-[10px] font-bold tracking-[0.4em] hover:bg-gold hover:text-luxuryBlack transition-all">Regresar</button>
             </div>
           )}
         </div>

@@ -12,21 +12,21 @@ const TreatmentsModal: React.FC<TreatmentsModalProps> = ({ isOpen, onClose, onSe
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center">
       <div className="absolute inset-0 bg-luxuryBlack/98 backdrop-blur-2xl" onClick={onClose}></div>
       
-      <div className="relative w-full max-w-7xl h-full max-h-[90vh] bg-luxuryBlack border border-gold/40 shadow-2xl overflow-y-auto custom-scrollbar animate-[slideUp_0.6s_ease-out]">
-        <div className="sticky top-0 bg-luxuryBlack/95 z-10 p-8 md:p-12 flex justify-between items-center border-b border-gold/10">
+      <div className="relative w-full h-full bg-luxuryBlack border-x border-gold/20 shadow-2xl overflow-y-auto custom-scrollbar animate-[slideUp_0.6s_ease-out] flex flex-col">
+        <div className="sticky top-0 bg-luxuryBlack/95 z-20 p-8 md:p-12 flex justify-between items-center border-b border-gold/10 pt-[max(2rem,calc(1.5rem+env(safe-area-inset-top)))]">
           <div className="flex flex-col">
             <span className="text-gold tracking-[0.5em] text-[10px] uppercase mb-2">Portfolio PRUEBA</span>
-            <h2 className="text-3xl md:text-5xl font-serif text-white italic">Protocolos de Elite</h2>
+            <h2 className="text-2xl md:text-5xl font-serif text-white italic leading-none">Protocolos de Elite</h2>
           </div>
-          <button onClick={onClose} className="w-12 h-12 rounded-full border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-luxuryBlack transition-all">
+          <button onClick={onClose} className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-luxuryBlack transition-all">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
         </div>
 
-        <div className="p-8 md:p-16">
+        <div className="p-8 md:p-16 flex-grow pb-[max(4rem,env(safe-area-inset-bottom))]">
           {treatmentsData.map((cat, idx) => (
             <div key={idx} className="mb-24 last:mb-0">
               <h3 className="text-gold text-xs uppercase tracking-[0.6em] font-bold mb-12 border-l-4 border-gold pl-6">{cat.title}</h3>
@@ -35,7 +35,7 @@ const TreatmentsModal: React.FC<TreatmentsModalProps> = ({ isOpen, onClose, onSe
                   <div 
                     key={i} 
                     onClick={() => onSelectTreatment(item)}
-                    className="group relative h-[450px] overflow-hidden cursor-pointer border border-white/5"
+                    className="group relative h-[400px] md:h-[450px] overflow-hidden cursor-pointer border border-white/5"
                   >
                     <img 
                       src={item.img} 
